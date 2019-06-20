@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+
+<% if @product.images.attached? %>
+   <p>
+ <strong>Images:</strong>
+ <br>
+ <% @product.images.each do |image| %>
+  <%= image_tag image.variant(resize: "300x300") %>
+  <%= link_to 'Remove', product_delete_image_path(@product, image), method: :delete,
+  data: {confirm: 'Are you sure'} %>
+
+  </p>
+  <% end %>
+  
+ </p>
+<% end %>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
